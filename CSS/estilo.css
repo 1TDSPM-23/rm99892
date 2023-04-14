@@ -9,11 +9,17 @@
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    background-color: #000000;
+    background-color: #d9d9d9;
 }
 
 .cabecalho img{
     width: 30%;
     max-width: 30%;
     display: block;
+}
+.cabecalho nav{
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    height: 100%;
 }
