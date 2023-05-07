@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/exercicio.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>1 – Crie um botão que, quando clicado, muda a cor do background do body da página exercicio-1.html.</p>
+        <button  onclick="mudaBackground()" >Mudar cor</button>
+    </div>
+
+    <div>
+        <p>2 – Crie um formulário com um campo de entrada de texto e um botão "Enviar". Quando o botão for clicado, o valor do campo de entrada deve ser adicionado como um novo item em uma lista na página.</p>
+        <input type="text" size="10" id="novoItem">
+        <button onclick="adicionarItem()">Adicionar</button>
+        <br>
+        <ul id="lista"></ul>
+    </div>
+
+    <div>
+        <p>3 – Crie uma imagem com um botão que, quando clicado, troca a imagem por outra.</p>
+        <img src="../img/social-1.png" alt="github" width="100" id="imagem">
+        <br>
+        <button onclick="mudaImagem()">Troca imagem</button>
+    </div>
+
+    <div>
+        <p>4 – Crie um botão e um elemento qualquer html, quandoo botão é clicado, exibe uma mensagem neste elemento html na página .</p>
+        <button onclick="mensagem('Olá Mundo')">Mostrar mensagem</button>
+        <p id="exibeMensagem"></p>
+    </div>
+
+    <div>
+        <p>5 – Crie um botão que, quando clicado, oculta um elemento HTML.</p>
+        <button onclick="tiraMensagem()">Exclui mensagem</button>
+        <p id="excluir">Me tire daquiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</p>
+    </div>
+
+</body>
+</html>
