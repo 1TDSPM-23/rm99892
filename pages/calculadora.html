@@ -16,15 +16,24 @@
             <div class="visor-calc">
                 <input type="text" name="visor" id="idVisor" placeholder="0" >
                 <div class="btn-calc">
-                    <button value="1" id="bnt-1">1</button>
-                    <button value="2" id="bnt-2">2</button>
-                    <button value="3" id="bnt-3">3</button>
+                    <button value="1" id="bnt-1" onclick="insereNumeroNoVisor(this, idVisor)">1</button>
+                    <button value="2" id="bnt-2" onclick="insereNumeroNoVisor(this, idVisor)">2</button>
+                    <button value="3" id="bnt-3" onclick="insereNumeroNoVisor(this, idVisor)">3</button>
+                    <button value="4" id="bnt-4" onclick="insereNumeroNoVisor(this, idVisor)">4</button>
+                    <button value="5" id="bnt-5" onclick="insereNumeroNoVisor(this, idVisor)">5</button>
+                    <button value="6" id="bnt-6" onclick="insereNumeroNoVisor(this, idVisor)">6</button>
+                    <button value="7" id="bnt-7" onclick="insereNumeroNoVisor(this, idVisor)">7</button>
+                    <button value="8" id="bnt-8" onclick="insereNumeroNoVisor(this, idVisor)">8</button>
+                    <button value="9" id="bnt-9" onclick="insereNumeroNoVisor(this, idVisor)">9</button>
                 </div> 
                 <div class="oper-calc">
-                    <button value="+" id="bntSoma">+</button>
+                    <button value="+" id="bntSoma" onclick="insereNumeroNoVisor(this, idVisor)">+</button>
+                    <button value="-" id="bntSubtracao" onclick="insereNumeroNoVisor(this, idVisor)">-</button>
+                    <button value="/" id="bntDivisao" onclick="insereNumeroNoVisor(this, idVisor)">/</button>
+                    <button value="*" id="bntMutiplicacao" onclick="insereNumeroNoVisor(this, idVisor)">*</button>
                 </div>
                 <div class="result-calc">
-                    <button value="=" id="bntResultado">=</button>
+                    <button value="=" id="bntResultado" onclick="resultadoDasOperacoes(idVisor)" >=</button>
                 </div>
             </div>
         </form>
