@@ -29,105 +29,140 @@
 // listaDeUsuarios.push(usuario1);
 // listaDeUsuarios.push(usuario2);
 //LISTA DE USUÁRIOS
-let listaDeUsuarios = [
-    {
-        nomeCompleto : "Enio Casper",
-        nomeUsuario : "enio",
-        senhaUsuario : "123456",
-        ccuUsuario : "sc"
-    },
-    {
-        nomeCompleto : "Danid Silva",
-        nomeUsuario : "danid",
-        senhaUsuario : "123456",
-        ccuUsuario : "rj"
-    },
-    {
-        nomeCompleto : "Gerson Lima",
-        nomeUsuario : "gege",
-        senhaUsuario : "123456",
-        ccuUsuario : "sp"
-    },
-    {
-        nomeCompleto : "Jorginho Lima",
-        nomeUsuario : "jojo",
-        senhaUsuario : "123456",
-        ccuUsuario : "rj"
-    },
-    {
-        nomeCompleto : "Edulado Biolante",
-        nomeUsuario : "dudu",
-        senhaUsuario : "123456",
-        ccuUsuario : "sp"
-    }
-];
+// let listaDeUsuarios = [
+//     {
+//         nomeCompleto : "Enio Casper",
+//         nomeUsuario : "enio",
+//         senhaUsuario : "123456",
+//         ccuUsuario : "sc"
+//     },
+//     {
+//         nomeCompleto : "Danid Silva",
+//         nomeUsuario : "danid",
+//         senhaUsuario : "123456",
+//         ccuUsuario : "rj"
+//     },
+//     {
+//         nomeCompleto : "Gerson Lima",
+//         nomeUsuario : "gege",
+//         senhaUsuario : "123456",
+//         ccuUsuario : "sp"
+//     },
+//     {
+//         nomeCompleto : "Jorginho Lima",
+//         nomeUsuario : "jojo",
+//         senhaUsuario : "123456",
+//         ccuUsuario : "rj"
+//     },
+//     {
+//         nomeCompleto : "Edulado Biolante",
+//         nomeUsuario : "dudu",
+//         senhaUsuario : "123456",
+//         ccuUsuario : "sp"
+//     }
+// ];
 
-const msgStatus = document.querySelector("#msg")
+// localStorage.setItem("listaUser", JSON.stringify(listaDeUsuarios));
 
-const formLogin = document.querySelector("#form[name='frm01']")
+const msgStatus = document.querySelector("#msg");
+const formLogin = document.querySelector("form[name='frm01']")
 
-const botaoSubmit = document.querySelector("#btnSubmit")
+const botaoSubmit = document.querySelector("#btnSubmit");
 botaoSubmit.addEventListener("click", ()=>{
-    validaFormularioCompleto();
-})
+    
+    const inputUser = document.querySelector("#idNm");
+    const inputPass = document.querySelector("#idPass");
+    const selCentroCusto = document.querySelector("#idCusto");
+
+    //OBJETO USUÁRIO-LOGADO
+    const usuarioLogado = {
+        nomeUsuarioLogado : inputUser.value,
+        senhaUsuarioLogado : inputPass.value,
+        ccuUsuarioLogado : selCentroCusto.value
+    }
+
+    //OBJETO USUÁRIO-VALIDADO
+    let usuarioValidado = {};
+
+    //Recuperando a lista de usuários do localStorage
+    let listaDeUsuarios = JSON.parse(localStorage.getItem("listaUser"));
+
+    if(usuarioLogado.nomeUsuarioLogado != "" && usuarioLogado.senhaUsuarioLogado != "" && usuarioLogado.ccuUsuarioLogado != "0"){
+
+       for (let x = 0; x < listaDeUsuarios.length; x++) {
+        
+           if(usuarioLogado.nomeUsuarioLogado == listaDeUsuarios[x].nomeUsuario && usuarioLogado.senhaUsuarioLogado == listaDeUsuarios[x].senhaUsuario && usuarioLogado.ccuUsuarioLogado == listaDeUsuarios[x].ccuUsuario){
+            usuarioValidado = listaDeUsuarios[x];
+    
+           }
+       
+       }
+
+    }else{
+        console.log("EXISTE ALGUM CAMPO SEM PREENCHIMENTO!")
+    }
+
+    if(usuarioValidado.nomeUsuario != undefined){
+        msgStatus.setAttribute("style","color:#00ff00");
+        msgStatus.innerHTML = `<span><strong>O usuário ${usuarioValidado.nomeCompleto} fez o login com SUCESSO!!</strong></span>`;
+
+        //Adicionar o usuário validado no localStorage
+        localStorage.setItem("user-validado", JSON.stringify(usuarioValidado));
+
+        //Criando token de autenticação
+        const token = Math.random().toString(16).substring(2)+Math.random().toString(16).substring(2);
+        //Adicionando o toke no localStorage
+        localStorage.setItem("user-token",token);
+
+        //Redirect
+        setTimeout(()=>{
+            window.location.href = "../index.html";
+        }, 3000);
+
+    }
+    else{
+        msgStatus.setAttribute("style","color:#ff0000");
+        msgStatus.innerHTML = `<span><strong>Nome de usuário ou senha inválidos...</strong></span>`;
+    }
+
+});
 
 function validaFormularioCompleto() {
 
-    formLogin.OnpreventDefault();
+    const inputUser = document.querySelector("#idNm");
+    const inputPass = document.querySelector("#idPass");
+    const selCentroCusto = document.querySelector("#idCusto");
 
-    const inputUser = document.querySelector("#idNm")
-    const inputPass = document.querySelector("#idPass")
-    const selCentroCusto = document.querySelector("#idCusto")
-
-
-    console.log(inputUser);
-    console.log(inputPass);
-    console.log(selCentroCusto);
-
-        //objeto usuario-logado
-        const usuarioLogado = {
-            nomeUsuarioLogado : inputUser.value,
-            senhaUsuarioLogado : inputPass.value,
-            ccuUsuarioLogado : selCentroCusto.value
-        }
-
-        //OBJETO USUARIO-VALIDADO
-        let usuarioValidado = {};
-
-
-    if(usuarioLogado.nomeUsuarioLogado != "" && senhaUsuario.senhaUsuarioLogado != "" && ccuusuarioLogado.ccuUsuarioLogado != "0"){
-
-        for (let x = 0; x < listaDeUsuarios; x++) {  
-       
-            if(usuarioLogado.nomeUsuarioLogado == listaDeUsuarios[x] && senhaUsuario.senhaUsuarioLogado ==  listaDeUsuarios[x] && ccuusuarioLogado.ccuUsuarioLogad ==  listaDeUsuarios[x]){
-                usuarioValidado = listaDeUsuarios[x];
-                
-                msgStatus.setAttribute("style", "color:#00ff00")
-                msgStatus.innerHTML = `<span><strong>O usuário ${usuarioValidado.nomeCompleto} fez login com SUCESSO!!</strong></span>`;
-
-            }
-            // }else{
-            //     msgStatus.setAttribute("style", "color:#ff0000")
-            //     msgStatus.innerHTML = `<span><strong>Nome do usuario ou senha invalidos...</strong></span>`;
-            // }
-
-        }
-
-    }else{
-       console.log("existe algum campo sem preenchimento")
+    //OBJETO USUÁRIO-LOGADO
+    const usuarioLogado = {
+        nomeUsuarioLogado : inputUser.value,
+        senhaUsuarioLogado : inputPass.value,
+        ccuUsuarioLogado : selCentroCusto.value
     }
 
-    if(usuarioValidado != null){
-        msgStatus.setAttribute("style", "color:#00ff00")
-        msgStatus.innerHTML = `<span><strong>O usuário ${usuarioValidado.nomeCompleto} fez login com SUCESSO!!</strong></span>`;
-    }else{
-        msgStatus.setAttribute("style", "color:#ff0000")
-        msgStatus.innerHTML = `<span><strong>Nome do usuario ou senha invalidos...</strong></span>`;
-        }
-}
+    //OBJETO USUÁRIO-VALIDADO
+    let usuarioValidado = {};
 
-// const form1 = document.querySelector("form[name='frm01']");
-// // console.log(form1);
+    if(usuarioLogado.nomeUsuarioLogado != "" && usuarioLogado.senhaUsuarioLogado != "" && usuarioLogado.ccuUsuarioLogado != "0"){
+
+       for (let x = 0; x < listaDeUsuarios.length; x++) {
+        
+           if(usuarioLogado.nomeUsuarioLogado == listaDeUsuarios[x].nomeUsuario && usuarioLogado.senhaUsuarioLogado == listaDeUsuarios[x].senhaUsuario && usuarioLogado.ccuUsuarioLogado == listaDeUsuarios[x].ccuUsuario){
+            usuarioValidado = listaDeUsuarios[x];
+                
+                msgStatus.setAttribute("style","color:#00ff00");
+                msgStatus.innerHTML = `<span><strong>O usuário ${usuarioValidado.nomeCompleto} fez o login com SUCESSO!!</strong></span>`;
+           }
+        //    }else{
+        //     msgStatus.setAttribute("style","color:#ff0000");
+        //     msgStatus.innerHTML = `<span><strong>Nome de usuário ou senha inválidos...</strong></span>`;
+        //    }
+       }
+
+    }else{
+        console.log("EXISTE ALGUM CAMPO SEM PREENCHIMENTO!")
+    }
+}
 
 // form1.addEventListener("submit", ()=>{
     const inputUser = document.querySelector("#idNm");
