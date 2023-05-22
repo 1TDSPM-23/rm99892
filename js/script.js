@@ -100,3 +100,21 @@
 
     //const inputUser = document.getElementById("idNm");
    // console.log(inputUser.value)
+
+   if(localStorage.getItem("user-token")){
+    const divWelcome = document.querySelector("#welcome");
+    const usuarioValidado = JSON.parse(localStorage.getItem("user-validado"));
+ 
+    divWelcome.innerHTML = usuarioValidado.nomeCompleto;
+ 
+    const botaoSair = document.querySelector("#btnSair");
+ 
+    botaoSair.addEventListener("click", ()=>{
+       localStorage.removeItem("user-token");
+       localStorage.removeItem("user-validado");
+       window.location.href = "../login.html";   
+    });
+ 
+ }else{
+    window.location.href = "../login.html";
+ }
